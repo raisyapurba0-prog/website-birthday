@@ -4,31 +4,43 @@ const flameZero = document.getElementById("flameZero");
 
 const blowButton = document.getElementById("blowButton");
 const instruction = document.getElementById("instruction");
+
 const wishMessage = document.getElementById("wishMessage");
+const continueButton = document.getElementById("continueButton");
 
 let candleBlown = false;
 
 function blowCandle() {
+
+    // Mencegah tombol ditekan berkali-kali
     if (candleBlown) return;
 
     candleBlown = true;
 
-    // Kedua api padam bersamaan
+    // Memadamkan kedua api lilin
     flameTwo.classList.add("off");
     flameZero.classList.add("off");
 
-    // Ubah instruksi
+    // Mengubah instruksi
     instruction.textContent =
         "Yeay! Semoga semua harapan baik menjadi kenyataan! ✨";
 
-    // Ubah tombol
+    // Mengubah tombol tiup lilin
     blowButton.innerHTML = "HARAPAN TERKIRIM ♡";
     blowButton.disabled = true;
 
-    // Tampilkan pesan ulang tahun
-    setTimeout(() => {
+    // Menampilkan pesan ulang tahun
+    setTimeout(function () {
+
         wishMessage.classList.add("show");
+
+        // Menampilkan tombol menuju halaman hadiah
+        setTimeout(function () {
+            continueButton.hidden = false;
+        }, 1200);
+
     }, 800);
 }
 
+// Menjalankan fungsi saat tombol ditekan
 blowButton.addEventListener("click", blowCandle);

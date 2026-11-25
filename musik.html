@@ -17,7 +17,12 @@
         <div class="music-glow"></div>
 
         <header class="music-header">
-            <h1>WAKTUNYA<br>GOYAAANGGG!</h1>
+            <p class="music-label">A LITTLE MUSIC FOR YOUR SPECIAL DAY</p>
+
+            <h1>
+                WAKTUNYA<br>
+                GOYAAANGGG!
+            </h1>
 
             <p class="music-subtitle">
                 Siap-siap ikut bergoyang! ♡
@@ -29,7 +34,6 @@
         <section class="music-player" id="musicPlayer">
 
             <!-- PIRINGAN HITAM -->
-
             <div class="music-disc" id="musicDisc">
                 <div class="disc-center">
                     <span>♡</span>
@@ -37,16 +41,13 @@
             </div>
 
             <!-- INFORMASI LAGU -->
-
             <div class="song-info">
                 <p class="song-title">TATITUT</p>
                 <p class="song-artist">Ayu Ting Ting</p>
             </div>
 
             <!-- KARAKTER MENARI -->
-
             <div class="dance-area">
-
                 <div class="dancer" id="dancer">
                     <div class="dancer-head">♫</div>
                     <div class="dancer-body"></div>
@@ -55,11 +56,9 @@
                     <div class="dancer-leg left-leg"></div>
                     <div class="dancer-leg right-leg"></div>
                 </div>
-
             </div>
 
             <!-- VISUALIZER -->
-
             <div class="music-visualizer" id="visualizer">
                 <span></span><span></span><span></span>
                 <span></span><span></span><span></span>
@@ -68,32 +67,27 @@
                 <span></span>
             </div>
 
-            <!-- LIRIK SATU PER SATU -->
-
+            <!-- LIRIK -->
             <div class="lyrics-box">
-
                 <p class="lyrics-label">
-                    SING ALONG WITH THE MUSIC ♡ 🎀
+                    SING ALONG WITH THE MUSIC ♡
                 </p>
 
                 <div class="lyrics-display">
                     <p class="lyric-line active" id="currentLyric">
-                        Hati siapa yang tak kecewa 💗
+                        Nikmati musiknya! ♡
                     </p>
                 </div>
 
                 <p class="lyrics-page" id="lyricsPage">
                     01 / 08
                 </p>
-
             </div>
 
             <!-- AUDIO -->
+            <audio id="birthdayMusic" src="assets/musik/tatitut.mp3" preload="metadata"></audio>
 
-            <audio id="birthdayMusic" src="assets/musik/tatitut.mp3"></audio>
-
-            <!-- TOMBOL MUSIK -->
-
+            <!-- KONTROL MUSIK -->
             <div class="music-controls">
 
                 <button id="playButton">
@@ -111,8 +105,18 @@
             </div>
 
             <p class="music-note">
-                Jangan lupa atur volumenya, ya! 🥰
+                Jangan lupa atur volumenya, ya! ♡
             </p>
+
+            <!-- LANJUT KE HALAMAN KUE -->
+            <a
+                href="./kue.html"
+                class="continue-button"
+                id="continueButton"
+                hidden
+            >
+                LANJUTKAN →
+            </a>
 
         </section>
 

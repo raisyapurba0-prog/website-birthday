@@ -5,7 +5,9 @@ const giftInstruction = document.getElementById("giftInstruction");
 
 const coupon = document.getElementById("coupon");
 const claimCoupon = document.getElementById("claimCoupon");
+
 const confirmation = document.getElementById("confirmation");
+const continueButton = document.getElementById("continueButton");
 
 const formLink = "https://forms.gle/zK7DwyGyWo7pS3oa8";
 
@@ -27,6 +29,7 @@ openGift.addEventListener("click", function () {
     openGift.textContent = "KOTAK SUDAH DIBUKA ♡";
     openGift.disabled = true;
 
+    // Menampilkan kupon setelah animasi kotak
     setTimeout(function () {
         coupon.classList.remove("hidden");
     }, 800);
@@ -40,12 +43,16 @@ claimCoupon.addEventListener("click", function () {
 
     couponUsed = true;
 
+    // Membuka Google Form pilihan hadiah
+    window.open(formLink, "_blank");
+
+    // Menyembunyikan kupon
     coupon.classList.add("hidden");
+
+    // Menampilkan konfirmasi
     confirmation.classList.remove("hidden");
 
     giftInstruction.textContent =
         "Hehehe, kuponnya sudah digunakan!";
-
-    window.open(formLink, "_blank");
 
 });

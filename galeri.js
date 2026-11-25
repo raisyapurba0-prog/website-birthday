@@ -48,17 +48,27 @@ const photoNumber = document.getElementById("photoNumber");
 
 const previousButton = document.getElementById("previousButton");
 const nextButton = document.getElementById("nextButton");
+
 const progressFill = document.getElementById("progressFill");
+const continueButton = document.getElementById("continueButton");
 
 let currentPhoto = 0;
+let transitionTimer;
 
 function showPhoto(index) {
+
     const photo = photos[index];
+
+    clearTimeout(transitionTimer);
+
+    // Sembunyikan tombol lanjut selama belum di foto terakhir
+    continueButton.hidden = true;
 
     galleryImage.style.opacity = "0";
     galleryImage.style.transform = "scale(0.97)";
 
-    setTimeout(function () {
+    transitionTimer = setTimeout(function () {
+
         galleryImage.onload = function () {
             galleryImage.style.opacity = "1";
             galleryImage.style.transform = "scale(1)";
@@ -67,6 +77,7 @@ function showPhoto(index) {
         galleryImage.onerror = function () {
             galleryImage.style.opacity = "1";
             galleryImage.style.transform = "scale(1)";
+
             galleryCaption.textContent =
                 "Foto belum ditemukan. Periksa nama dan lokasi file.";
         };
@@ -85,21 +96,38 @@ function showPhoto(index) {
         previousButton.disabled = index === 0;
         nextButton.disabled = index === photos.length - 1;
 
+        // Tampilkan tombol lanjut pada foto ke-10
+        if (index === photos.length - 1) {
+            continueButton.hidden = false;
+        }
+
     }, 350);
 }
 
+// FOTO SEBELUMNYA
 previousButton.addEventListener("click", function () {
+
     if (currentPhoto > 0) {
         currentPhoto--;
         showPhoto(currentPhoto);
     }
+
 });
 
+// FOTO BERIKUTNYA
 nextButton.addEventListener("click", function () {
+
     if (currentPhoto < photos.length - 1) {
         currentPhoto++;
         showPhoto(currentPhoto);
     }
+
 });
 
+// TOMBOL LANJUT KE MUSIK
+continueButton.addEventListener("click", function () {
+    window.location.href = "./musik.html";
+});
+
+// TAMPILKAN FOTO PERTAMA
 showPhoto(currentPhoto);

@@ -14,6 +14,8 @@ body {
     font-family: 'Cormorant Garamond', serif;
 }
 
+/* LATAR BELAKANG */
+
 .letter-page {
     position: relative;
     min-height: 100vh;
@@ -44,11 +46,14 @@ body {
         transform: scale(0.8);
         opacity: 0.4;
     }
+
     to {
         transform: scale(1.2);
         opacity: 0.8;
     }
 }
+
+/* ORNAMEN CAHAYA */
 
 .sparkle {
     position: fixed;
@@ -83,6 +88,7 @@ body {
         opacity: 0.2;
         transform: scale(0.7);
     }
+
     to {
         opacity: 1;
         transform: scale(1.6);
@@ -214,6 +220,8 @@ body {
     margin-bottom: 30px;
 }
 
+/* TOMBOL BUKA SURAT */
+
 #openLetter {
     padding: 14px 35px;
     border: 1px solid #c9a46d;
@@ -278,13 +286,13 @@ body {
 .letter-card {
     position: relative;
     padding: 65px 75px;
-    background:
-        linear-gradient(145deg, #fff9ee, #f1e2cd);
+    background: linear-gradient(145deg, #fff9ee, #f1e2cd);
     color: #49333a;
     border: 1px solid #d5b98e;
     box-shadow:
         0 25px 80px rgba(0, 0, 0, 0.4),
         0 0 35px rgba(192, 140, 92, 0.12);
+    overflow: hidden;
 }
 
 .letter-decoration {
@@ -293,6 +301,7 @@ body {
     font-size: 24px;
     letter-spacing: 10px;
     margin-bottom: 35px;
+    animation: decorationFloat 4s ease-in-out infinite;
 }
 
 .letter-greeting {
@@ -308,6 +317,7 @@ body {
     font-size: clamp(23px, 4vw, 34px);
     font-weight: 600;
     line-height: 1.5;
+    text-shadow: 0 2px 12px rgba(139, 52, 76, 0.12);
 }
 
 .letter-divider {
@@ -328,6 +338,7 @@ body {
 
 .letter-divider span {
     font-size: 20px;
+    animation: heartPulse 2s ease-in-out infinite;
 }
 
 .letter-body {
@@ -375,48 +386,7 @@ body {
     margin-top: 40px;
 }
 
-/* RESPONSIVE */
-
-@media (max-width: 600px) {
-    .letter-page {
-        padding: 45px 15px;
-    }
-
-    .top-label {
-        font-size: 8px;
-        letter-spacing: 3px;
-    }
-
-    .envelope-container {
-        width: 270px;
-        height: 180px;
-    }
-
-    .letter-card {
-        padding: 40px 25px;
-    }
-
-    .letter-body {
-        font-size: 17px;
-        line-height: 1.8;
-    }
-
-    .letter-body p {
-        text-indent: 22px;
-        margin-bottom: 16px;
-    }
-
-    .letter-greeting {
-        font-size: 20px;
-    }
-
-    .letter-body .birthday-closing {
-        font-size: 20px;
-    }
-}
-
-
-/* CINEMATIC LETTER REVEAL */
+/* ANIMASI KEMUNCULAN SURAT */
 
 .letter-content.show .letter-card {
     animation: letterReveal 1.5s ease both;
@@ -470,21 +440,6 @@ body {
     }
 }
 
-/* CAHAYA KEEMASAN */
-
-.letter-card {
-    overflow: hidden;
-}
-
-.letter-card::selection {
-    background: #d9b47c;
-    color: #49333a;
-}
-
-.letter-decoration {
-    animation: decorationFloat 4s ease-in-out infinite;
-}
-
 @keyframes decorationFloat {
     0%, 100% {
         transform: translateY(0);
@@ -495,18 +450,6 @@ body {
     }
 }
 
-/* JUDUL SURAT */
-
-.letter-card h1 {
-    text-shadow: 0 2px 12px rgba(139, 52, 76, 0.12);
-}
-
-/* PEMBATAS SURAT */
-
-.letter-divider span {
-    animation: heartPulse 2s ease-in-out infinite;
-}
-
 @keyframes heartPulse {
     0%, 100% {
         transform: scale(1);
@@ -514,5 +457,106 @@ body {
 
     50% {
         transform: scale(1.25);
+    }
+}
+
+/* TOMBOL LANJUTKAN KE GALERI */
+
+.continue-button {
+    display: block;
+    width: fit-content;
+    margin: 35px auto 15px;
+    padding: 15px 40px;
+
+    border: 1px solid #c9a46d;
+    border-radius: 30px;
+
+    background: linear-gradient(
+        135deg,
+        #9b6b43,
+        #e0c18d,
+        #9b6b43
+    );
+
+    color: #1b0b12;
+    font-family: 'Cinzel', serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-decoration: none;
+    text-align: center;
+
+    box-shadow: 0 0 15px rgba(214, 180, 125, 0.2);
+
+    transition:
+        transform 0.4s ease,
+        box-shadow 0.4s ease,
+        background 0.4s ease;
+}
+
+.continue-button:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 0 28px rgba(219, 176, 112, 0.5);
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 600px) {
+
+    .letter-page {
+        padding: 45px 15px;
+    }
+
+    .top-label {
+        font-size: 8px;
+        letter-spacing: 3px;
+    }
+
+    .envelope-container {
+        width: 270px;
+        height: 180px;
+    }
+
+    .letter-card {
+        padding: 40px 25px;
+    }
+
+    .letter-body {
+        font-size: 17px;
+        line-height: 1.8;
+    }
+
+    .letter-body p {
+        text-indent: 22px;
+        margin-bottom: 16px;
+    }
+
+    .letter-greeting {
+        font-size: 20px;
+    }
+
+    .letter-body .birthday-closing {
+        font-size: 20px;
+    }
+
+    .continue-button {
+        padding: 13px 30px;
+        font-size: 11px;
+        margin-top: 28px;
+    }
+}
+
+@media (max-width: 380px) {
+    .letter-card {
+        padding: 35px 20px;
+    }
+
+    .letter-body {
+        font-size: 16px;
+    }
+
+    .envelope-container {
+        width: 245px;
+        height: 165px;
     }
 }

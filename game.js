@@ -72,6 +72,7 @@ function createBalloon() {
     balloon.setAttribute("aria-label", `Balon ${data.color}`);
 
     const maxLeft = Math.max(0, gameArena.clientWidth - 75);
+
     balloon.style.left = `${Math.random() * maxLeft}px`;
     balloon.style.bottom = "-100px";
 
@@ -110,15 +111,20 @@ function createBalloon() {
         balloon.classList.add("popped");
         animation.cancel();
 
-        setTimeout(() => {
+        setTimeout(function () {
             balloon.remove();
-            activeBalloons = activeBalloons.filter(item => item !== balloon);
+            activeBalloons = activeBalloons.filter(
+                item => item !== balloon
+            );
         }, 180);
     });
 
-    animation.onfinish = () => {
+    animation.onfinish = function () {
         balloon.remove();
-        activeBalloons = activeBalloons.filter(item => item !== balloon);
+
+        activeBalloons = activeBalloons.filter(
+            item => item !== balloon
+        );
     };
 }
 
@@ -131,6 +137,7 @@ function startGame() {
 
     scoreDisplay.textContent = "0";
     timerDisplay.textContent = "40";
+
     messageBox.textContent = "AYOOO, PECAHKAN SEMUANYA! 🎈";
 
     gameStart.classList.add("hidden");
@@ -143,8 +150,9 @@ function startGame() {
 
     balloonInterval = setInterval(createBalloon, 650);
 
-    timerInterval = setInterval(() => {
+    timerInterval = setInterval(function () {
         timeLeft--;
+
         timerDisplay.textContent = timeLeft;
 
         if (timeLeft <= 0) {
@@ -180,7 +188,7 @@ function endGame() {
 }
 
 function continueGame() {
-    window.location.href = "penutup.html";
+    window.location.href = "./penutup.html";
 }
 
 startButton.addEventListener("click", startGame);

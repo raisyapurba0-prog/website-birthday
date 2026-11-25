@@ -11,40 +11,39 @@ const musicPlayer = document.getElementById("musicPlayer");
 
 const currentLyric = document.getElementById("currentLyric");
 const lyricsPage = document.getElementById("lyricsPage");
+const continueButton = document.getElementById("continueButton");
 
-/* DAFTAR LIRIK DAN WAKTU */
-
+// DAFTAR LIRIK DAN WAKTU
 const lyrics = [
-    { time: 0, text: "Hati siapa yang tak kecewa 💗" },
-    { time: 3, text: "Atu titat titut atu tutuh tatih tayang 🎀" },
-    { time: 6.5, text: "Kasih sayang darimu yang semakin menghilang 🥺" },
-    { time: 10, text: "Apakah kau sudah punya penggantiku? 😚" },
-    { time: 13.5, text: "Bisa-bisa aku mati karena cemburu 😤💕" },
-    { time: 17, text: "Atu tium-tium atu tutuh peyuk ciyum 😘" },
-    { time: 20, text: "Pelukan hangat yang tak lagi aku rasakan 🥹" },
-    { time: 23, text: "Aku butuh cinta, bukan yang lainnya 🫶🏻" },
-    { time: 26, text: "Kasih sayang darimu sudah cukup bagiku 💞" }
+    { time: 0, text: "Musiknya sudah dimulai! ♡" },
+    { time: 3, text: "Waktunya menikmati musik! 🎀" },
+    { time: 6.5, text: "Jangan cuma duduk diam! 💃" },
+    { time: 10, text: "Ayo ikut bergoyang! 😚" },
+    { time: 13.5, text: "Semangat terus, Bubub! ✨" },
+    { time: 17, text: "Nikmati setiap momennya! ♡" },
+    { time: 20, text: "Goyang sedikit tidak apa-apa! 🥳" },
+    { time: 23, text: "Nah, begitu dong! 💗" },
+    { time: 26, text: "Yeay, musiknya hampir selesai! 🎉" }
 ];
-/* MENJALANKAN ANIMASI */
 
+// STATUS LIRIK
+let previousLyricIndex = -1;
+
+// MENJALANKAN ANIMASI
 function startAnimation() {
     musicDisc.classList.add("playing");
     visualizer.classList.add("playing");
     musicPlayer.classList.add("playing");
 }
 
-/* MENGHENTIKAN ANIMASI */
-
+// MENGHENTIKAN ANIMASI
 function stopAnimation() {
     musicDisc.classList.remove("playing");
     visualizer.classList.remove("playing");
     musicPlayer.classList.remove("playing");
 }
 
-/* MEMPERBARUI LIRIK */
-
-let previousLyricIndex = -1;
-
+// MEMPERBARUI LIRIK
 function updateLyrics() {
     const currentTime = birthdayMusic.currentTime;
 
@@ -60,7 +59,6 @@ function updateLyrics() {
         previousLyricIndex = activeIndex;
 
         currentLyric.classList.remove("active");
-
         currentLyric.textContent = lyrics[activeIndex].text;
 
         lyricsPage.textContent =
@@ -69,70 +67,59 @@ function updateLyrics() {
             String(lyrics.length).padStart(2, "0");
 
         void currentLyric.offsetWidth;
-
         currentLyric.classList.add("active");
     }
 }
 
-/* TOMBOL PUTAR MUSIK */
-
-playButton.addEventListener("click", function () {
-    birthdayMusic.play()
-        .then(function () {
-            startAnimation();
-            updateLyrics();
-        })
-        .catch(function () {
-            alert("Musik belum bisa diputar. Periksa file tatitut.mp3, ya!");
-        });
+// TOMBOL PUTAR
+playButton.addEventListener("click", async function () {
+    try {
+        await birthdayMusic.play();
+    } catch (error) {
+        alert("Musik belum bisa diputar. Periksa file tatitut.mp3, ya!");
+    }
 });
 
-/* TOMBOL JEDA */
-
+// TOMBOL JEDA
 pauseButton.addEventListener("click", function () {
     birthdayMusic.pause();
-    stopAnimation();
 });
 
-/* TOMBOL PUTAR ULANG */
-
-replayButton.addEventListener("click", function () {
+// TOMBOL PUTAR ULANG
+replayButton.addEventListener("click", async function () {
     birthdayMusic.currentTime = 0;
 
     previousLyricIndex = -1;
-    updateLyrics();
 
-    birthdayMusic.play()
-        .then(function () {
-            startAnimation();
-        })
-        .catch(function () {
-            alert("Musik belum bisa diputar. Periksa file tatitut.mp3, ya!");
-        });
+    continueButton.hidden = true;
+
+    try {
+        await birthdayMusic.play();
+    } catch (error) {
+        alert("Musik belum bisa diputar. Periksa file tatitut.mp3, ya!");
+    }
 });
 
-/* AUDIO MENGIKUTI WAKTU LAGU */
-
+// AUDIO MENGIKUTI WAKTU LAGU
 birthdayMusic.addEventListener("timeupdate", updateLyrics);
-
 birthdayMusic.addEventListener("seeked", updateLyrics);
 
-/* STATUS MUSIK */
-
-birthdayMusic.addEventListener("play", startAnimation);
+// STATUS MUSIK
+birthdayMusic.addEventListener("play", function () {
+    startAnimation();
+    continueButton.hidden = true;
+});
 
 birthdayMusic.addEventListener("pause", stopAnimation);
 
-/* KETIKA MUSIK SELESAI */
-
+// KETIKA MUSIK SELESAI
 birthdayMusic.addEventListener("ended", function () {
     stopAnimation();
 
     currentLyric.classList.remove("active");
+    currentLyric.textContent = "YEAY! MUSIK SELESAI! ♡";
 
-    currentLyric.textContent = "Yeay! Selesai nyanyi! 💗";
+    lyricsPage.textContent = "SELESAI";
 
-    lyricsPage.textContent = "08 / 08";
-
-    previousLyricIndex = -1;
+    continueButton.hidden = false;
 });
